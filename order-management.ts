@@ -53,3 +53,23 @@ export interface Paginated<T> {
   page: number;
   total: number;
 }
+
+/*
+ * Giải thích yêu cầu đề bài:
+ * - Module được chia thành các interface Customer, Product, OrderItem và Order
+ *   để mô tả rõ dữ liệu của khách hàng, sản phẩm và đơn hàng.
+ * - OrderStatus là enum, giúp trạng thái đơn hàng chỉ nhận các giá trị hợp lệ
+ *   thay vì dùng chuỗi tùy ý.
+ * - OrderItem dùng Pick<Product, 'id' | 'name' | 'price'> để tái sử dụng
+ *   các thuộc tính cần thiết của Product, sau đó thêm quantity.
+ * - Order chứa customer kiểu Customer và items là mảng OrderItem, thể hiện
+ *   quan hệ giữa đơn hàng, khách hàng và các sản phẩm trong đơn.
+ * - CreateOrderDto dùng Omit để loại bỏ các trường hệ thống tự tạo hoặc tự tính
+ *   như id, totalAmount, createdAt và status; đồng thời nhận customerId.
+ * - UpdateOrderDto dùng Partial<CreateOrderDto>, cho phép cập nhật từng phần
+ *   của đơn hàng mà không cần gửi lại toàn bộ dữ liệu.
+ * - ApiResponse<T> và Paginated<T> minh họa generic: cùng một cấu trúc có thể
+ *   dùng với nhiều kiểu dữ liệu khác nhau mà vẫn giữ được kiểm tra kiểu.
+ * - Cách thiết kế này đáp ứng yêu cầu tái sử dụng interface, enum, generic
+ *   và Utility Types (Pick, Omit, Partial), đồng thời hạn chế trùng lặp code.
+ */
