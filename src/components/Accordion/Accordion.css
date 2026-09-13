@@ -1,0 +1,101 @@
+/* Style cho Compound Component Accordion */
+
+.accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.accordion-item {
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: var(--card-bg, #ffffff);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.accordion-item:hover {
+  border-color: var(--primary-light, #c7d2fe);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
+}
+
+.accordion-item--open {
+  border-color: var(--primary, #6366f1);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.12);
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #1e293b);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.accordion-header:hover {
+  background-color: var(--item-hover-bg, #f8fafc);
+}
+
+.accordion-header--active {
+  background-color: var(--item-active-bg, #eef2ff);
+  color: var(--primary-dark, #4338ca);
+}
+
+.accordion-header-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.accordion-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted, #64748b);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.accordion-header:hover .accordion-chevron {
+  color: var(--primary, #6366f1);
+}
+
+.accordion-chevron--rotated {
+  transform: rotate(180deg);
+  color: var(--primary, #6366f1);
+}
+
+.accordion-body {
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  background: var(--body-bg, #fafafa);
+  animation: accordionSlideDown 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-body-inner {
+  padding: 20px;
+}
+
+@keyframes accordionSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
