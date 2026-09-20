@@ -12,21 +12,17 @@ interface OrderAccordionListProps {
 export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }) => {
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
 
-  // Lọc đơn hàng theo trạng thái nếu có
   const filteredOrders = useMemo(() => {
     if (selectedStatus === 'ALL') return orders;
     return orders.filter((order) => order.status === selectedStatus);
   }, [orders, selectedStatus]);
 
-  // Áp dụng custom hook usePagination<Order> với Generic rõ ràng cho Order[]
   const pagination = usePagination<Order>(filteredOrders, 4);
 
-  // Định dạng tiền tệ VND
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   };
 
-  // Định dạng ngày giờ
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat('vi-VN', {
       year: 'numeric',
@@ -37,7 +33,6 @@ export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }
     }).format(new Date(date));
   };
 
-  // Helper render Badge trạng thái
   const getStatusBadge = (status: OrderStatus) => {
     const config: Record<OrderStatus, { label: string; className: string }> = {
       [OrderStatus.PENDING]: { label: 'Chờ xử lý', className: 'badge--pending' },
@@ -56,7 +51,6 @@ export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }
           <h2 className="section-title">Danh sách Đơn hàng (Compound Component Accordion)</h2>
         </div>
 
-        {/* Bộ lọc trạng thái đơn hàng */}
         <div className="status-filter">
           <label htmlFor="statusFilter">Lọc theo trạng thái:</label>
           <select
@@ -82,7 +76,6 @@ export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }
           <p>Không tìm thấy đơn hàng nào phù hợp với bộ lọc.</p>
         </div>
       ) : (
-        /* Compound Component Accordion hoàn chỉnh theo đúng bài giảng slide */
         <Accordion defaultOpenId={pagination.currentData[0]?.id}>
           {pagination.currentData.map((order) => (
             <Accordion.Item key={order.id} value={order.id} className="order-accordion-item">
@@ -116,7 +109,6 @@ export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }
 
               <Accordion.Body className="order-body-content">
                 <div className="order-detail-grid">
-                  {/* Thông tin khách hàng & Giao hàng */}
                   <div className="order-info-card">
                     <h4 className="info-card-title">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -149,7 +141,6 @@ export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }
                     )}
                   </div>
 
-                  {/* Bảng danh sách OrderItem[] */}
                   <div className="order-items-card">
                     <h4 className="info-card-title">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -206,7 +197,6 @@ export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }
         </Accordion>
       )}
 
-      {/* Thanh điều khiển phân trang tái sử dụng */}
       <PaginationControls
         currentPage={pagination.currentPage}
         totalPages={pagination.totalPages}
