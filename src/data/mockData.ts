@@ -1,8 +1,5 @@
 import { Product, Order, OrderStatus } from '../types/order-management';
 
-/**
- * Danh sách sản phẩm mẫu theo kiểu Product (Tuần 1)
- */
 export const mockProducts: Product[] = [
   {
     id: 'PROD-001',
@@ -114,9 +111,7 @@ export const mockProducts: Product[] = [
   },
 ];
 
-/**
- * Danh sách đơn hàng mẫu theo cấu trúc Order của Tuần 1
- */
+
 export const mockOrders: Order[] = [
   {
     id: 'ORD-2026-001',

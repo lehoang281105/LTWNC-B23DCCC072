@@ -48,7 +48,7 @@ export const OrderAccordionList: React.FC<OrderAccordionListProps> = ({ orders }
     <div className="order-list-section">
       <div className="section-header">
         <div>
-          <h2 className="section-title">Danh sách Đơn hàng (Compound Component Accordion)</h2>
+          <h2 className="section-title">Danh sách Đơn hàng</h2>
         </div>
 
         <div className="status-filter">
