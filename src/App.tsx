@@ -26,7 +26,7 @@ export function App() {
               </svg>
             </div>
             <div>
-              <h1 className="brand-title">Order Management &amp; React Design Patterns</h1>
+              <h1 className="brand-title">TechShop</h1>
             </div>
           </div>
 
@@ -47,7 +47,7 @@ export function App() {
               <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
               <line x1="12" y1="22.08" x2="12" y2="12" />
             </svg>
-            <span>Sản phẩm (Redux Toolkit)</span>
+            <span>Sản phẩm</span>
           </button>
 
           <button

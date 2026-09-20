@@ -24,7 +24,7 @@ export const ProductList: React.FC = () => {
     <div className="rtk-product-section">
       <div className="section-header">
         <div>
-          <h2 className="section-title">Danh mục Sản phẩm (Redux Toolkit)</h2>
+          <h2 className="section-title">Danh mục Sản phẩm</h2>
         </div>
         {status === 'failed' && (
           <button type="button" className="rtk-retry-btn" onClick={() => dispatch(fetchProducts())}>
