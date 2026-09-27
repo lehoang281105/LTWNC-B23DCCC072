@@ -1,4 +1,4 @@
-## So sánh lựa chọn Zustand store so với Redux Toolkit
+## So sánh lựa chọn Zustand so với Redux Toolkit
 
 Việc chọn **Zustand** cho tính năng "Sản phẩm yêu thích" mang lại sự tinh gọn tối đa vì không cần khai báo slice, actions, reducer riêng hay bọc `<Provider>` quanh ứng dụng. Component chỉ cần gọi hook `useFavoritesStore` với selector để truy xuất và cập nhật state trực tiếp, giúp mã nguồn ngắn hơn đáng kể và tự động tối ưu re-render.
 
