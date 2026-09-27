@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchProducts } from './productsSlice';
 import { addItem } from '../cart/cartSlice';
 import { usePagination } from '../../hooks/usePagination';
 import { PaginationControls } from '../../components/PaginationControls/PaginationControls';
+import { useFavoritesStore } from '../favorites/favoritesStore';
 import './ProductList.css';
 
 const formatCurrency = (amount: number): string =>
@@ -13,6 +14,10 @@ export const ProductList: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status, error } = useAppSelector((state) => state.products);
   const pagination = usePagination(items, 6);
+
+  const favorites = useFavoritesStore((state) => state.favorites);
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+  const favoriteIds = useMemo(() => new Set(favorites.map((f) => f.id)), [favorites]);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -54,14 +59,31 @@ export const ProductList: React.FC = () => {
 
       {status === 'succeeded' && (
         <div className="product-grid">
-          {pagination.currentData.map((prod) => (
-            <div key={prod.id} className="product-card">
-              {prod.imageUrl && (
+          {pagination.currentData.map((prod) => {
+            const isFav = favoriteIds.has(prod.id);
+            return (
+              <div key={prod.id} className="product-card">
                 <div className="product-image-box">
-                  <img src={prod.imageUrl} alt={prod.name} className="product-image" loading="lazy" />
+                  {prod.imageUrl ? (
+                    <img src={prod.imageUrl} alt={prod.name} className="product-image" loading="lazy" />
+                  ) : (
+                    <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af' }}>
+                      Không có ảnh
+                    </div>
+                  )}
                   {prod.category && <span className="product-badge">{prod.category}</span>}
+                  <button
+                    type="button"
+                    className={`product-fav-btn ${isFav ? 'product-fav-btn--active' : ''}`}
+                    title={isFav ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}
+                    aria-label={isFav ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}
+                    onClick={() => toggleFavorite(prod)}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill={isFav ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                  </button>
                 </div>
-              )}
 
               <div className="product-card-body">
                 <div className="product-sku">Mã: {prod.id}</div>
@@ -95,7 +117,8 @@ export const ProductList: React.FC = () => {
                 </button>
               </div>
             </div>
-          ))}
+          );
+        })}
         </div>
       )}
 

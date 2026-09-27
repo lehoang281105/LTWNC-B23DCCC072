@@ -137,6 +137,39 @@
   border-radius: 9999px;
 }
 
+.product-fav-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-fav-btn:hover {
+  background: #ffffff;
+  color: #ef4444;
+  transform: scale(1.12);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.product-fav-btn--active {
+  color: #ef4444;
+  background: #ffffff;
+  border-color: #fecaca;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+}
+
 .product-card-body {
   padding: 16px;
   display: flex;
